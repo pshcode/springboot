@@ -1,5 +1,5 @@
 logging:
   level:
-    root: warn
+    root: debug
     org.springframework.security: debug
-    com.manning.readinglist: info
+    com.manning.readinglist: debug

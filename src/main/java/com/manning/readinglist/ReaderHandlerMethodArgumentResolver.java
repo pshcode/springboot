@@ -7,9 +7,6 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
-/**
- * @author SungHoon, Park
- */
 public class ReaderHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
 
 	@Override
@@ -18,8 +15,9 @@ public class ReaderHandlerMethodArgumentResolver implements HandlerMethodArgumen
 	}
 
 	@Override
-	public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
-		Authentication auth = (Authentication)webRequest.getUserPrincipal();
+	public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
+		NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
+		Authentication auth = (Authentication) webRequest.getUserPrincipal();
 		return auth != null && auth.getPrincipal() instanceof Reader ? auth.getPrincipal() : null;
 	}
 
