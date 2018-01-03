@@ -12,28 +12,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/")
 public class ReadingListController {
 
+	private static final String reader = "craig";
+
 	private ReadingListRepository readingListRepository;
-	private AmazonProperties amazonProperties;
 
 	@Autowired
-	public ReadingListController(ReadingListRepository readingListRepository, AmazonProperties amazonProperties) {
+	public ReadingListController(ReadingListRepository readingListRepository) {
 		this.readingListRepository = readingListRepository;
-		this.amazonProperties = amazonProperties;
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String readersBooks(Reader reader, Model model) {
+	public String readersBooks(Model model) {
 		List<Book> readingList = readingListRepository.findByReader(reader);
 		if (readingList != null) {
 			model.addAttribute("books", readingList);
-			model.addAttribute("reader", reader);
-			model.addAttribute("amazonID", amazonProperties.getAssociateId());
 		}
 		return "readingList";
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String addToReadingList(Reader reader, Book book) {
+	public String addToReadingList(Book book) {
 		book.setReader(reader);
 		readingListRepository.save(book);
 		return "redirect:/";

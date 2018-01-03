@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author SungHoon, Park
  */
 public interface ReadingListRepository extends JpaRepository<Book, Long> {
-	List<Book> findByReader(Reader reader);
+	List<Book> findByReader(String reader);
 }
